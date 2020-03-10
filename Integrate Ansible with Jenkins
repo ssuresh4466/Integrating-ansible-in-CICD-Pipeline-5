@@ -1,0 +1,26 @@
+we should have two ec2 instances for this task.
+one ec2 for jenkins server and other for ansible server.
+
+
+(we need to enable ssh connection between jenkins and ansible hosts which is similar to 
+ssh connection between jenkins and docker hosts, for this we nonfigure Systems =>
+Publish Over SSH and add ssh server.
+
+any name
+hostname: ip addr of ansible system.
+username: ansadmin(any new user)
+Advanced => use password authentication and add password then Test connection.
+
+Now , we need to create new jenkins job , whenever we run that jenkins job 
+the artifacts should be copied into that target env.(ansible host)
+
+Job Name:  Deploy_on_Container_using_ansible
+add github link and maven build and 
+Post build action : Publish Over SSH => select ansible server 
+=> webapp/target/*.war (whatever the path in your system)
+=> Remote Directory : //opt//docker
+sudo chown -R ansadmin:ansadmin /opt/docker in terminal .
+
+now after building that jenkins job the war file appears in /opt/docker path
+
+
