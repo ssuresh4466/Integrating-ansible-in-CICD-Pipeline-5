@@ -19,4 +19,23 @@ vim create-simple-devops-image.yml
  save and execute.
  ansible-playbook -i hosts create-simple-devops-image.yml
  
+ ---
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: stop current running container
+    command: docker stop simple-devops-container
+    ignore_errors: yes // even there is no container , it should not be fail
+  - name: remove stopped container
+    command: docker rm simple-devops-container
+    ignore_errors: yes // even there is no container , it should not be fail
+  - name: remove image
+    command: docker rmi project/simple-devops-image:latest
+    ignore_errors: yes // even there is no image , it should not be fail
+  - name: pull image project/simple-devops-image:latest
+    command: docker pull 
+  - name: creating container from the image.
+    command: docker run -d --name simple-devops-container -p 8080:8080 project/simple-devops-image:latest
     
+    we can execute the playbook what ever the hosts in the inventory file
