@@ -1,0 +1,22 @@
+in ansible-server /opt/docker path we have war file and 
+now we need to create Dockerfile in same location.
+
+vim Dockerfile
+FROM tomcat:latest
+MAINTAINER Suresh
+COPY ./vprofile-v1.war /usr/local/tomcat/webapps
+
+this is the same Dockerfile used in docker-server to build the image.
+
+actually next step is to build image and then container in the new node.
+we can do manually but we should do it automation by creating yml file.
+
+vim simple-devops-project.yml
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: build docker image using war file
+    command: docker build -t simple-devops-image .
+    args:
+      chdir: /opt/docker
