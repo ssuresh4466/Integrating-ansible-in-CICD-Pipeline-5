@@ -1,0 +1,18 @@
+first remove the existing image and container which are created by manually.
+
+Jenkins Console => edit previous job => Configure add the commands in Exec Command blank.
+ansible-playbook -i path-of-inventory-file (/opt/docker/hosts) name-of-playbook;
+=> save => build => success
+here the output should be as following.
+war file will be generated and creates image and container in the mentioned host.
+now we can access in web. ip:8080/vprofile-v1
+
+if we build the same job again there should be another image and container.
+if we enable poll SCM for * * * * * , it can run automatically every minute.
+if we modify then only it starts new build.
+but it gives UNSTABLE. because it can not create image/container with same name.
+so we should delete image/container before building job.
+ we do it in next file
+
+
+
