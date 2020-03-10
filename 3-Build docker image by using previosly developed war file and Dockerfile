@@ -27,6 +27,8 @@ ansible-playbook -i hosts simple-devops-project.yml --check
 ## but it does not actually create image.
 ansible-playbook -i hosts simple-devops-project.yml
 
+now run the playbook then we can get image and container.
+
 now we can find the generated docker image.
 
 but it should be executed from the jenkins job itself.
