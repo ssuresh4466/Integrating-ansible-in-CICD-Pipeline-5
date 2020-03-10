@@ -1,3 +1,24 @@
 create a dockerhub account.
 sign-in
 ansible-server :
+create image and container using previous playbook.
+to push the image into hub:
+tag : docker tag simple-devops-image project/simple-devops-image
+docker push image name gives error
+we should login first
+docker login
+docker push project/simple-devops-image
+then we get the image in github repository.
+now even we delete the image in our local system then 
+we can pull the image from docker hub.
+docker pull project/simple-devops-image
+and we can pull the image from docker-host system also
+docker-host: docker pull project/simple-devops-image
+for that the user ansadmin should be added to docker group as follow.
+usermod -aG docker ansadmin
+check it by id command
+switch to ansadmin
+docker pull project/simple-devops-image
+and we can create container also here.
+
+but we need to do the same by using ansible playbook, in next file
