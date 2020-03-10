@@ -20,3 +20,27 @@ vim simple-devops-project.yml
     command: docker build -t simple-devops-image .
     args:
       chdir: /opt/docker
+vi /opt/docker/hosts
+localhost(or any ip)
+ansible-playbook -i hosts simple-devops-project.yml --check 
+### just to check how the playbook is going to run.
+## but it does not actually create image.
+ansible-playbook -i hosts simple-devops-project.yml
+
+now we can find the generated docker image.
+
+but it should be executed from the jenkins job itself.
+
+edit the above playbook.
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: build docker image using war file
+    command: docker build -t simple-devops-image .
+    args:
+      chdir: /opt/docker
+  - name: creating container from the image.
+    command: docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image
+    
+
