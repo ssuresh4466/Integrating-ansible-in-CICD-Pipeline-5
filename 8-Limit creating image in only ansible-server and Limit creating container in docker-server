@@ -1,0 +1,18 @@
+ansible-server:
+cd /opt/docker 
+we have playbooks here image.yml and project.yml
+now we are executing image.yml in the ansible-server and 
+we are limiting the creation of image only to ansible-server.
+ansible-playbook -i hosts image.yml --limit localhost
+hosts file has localhost and docker-server ip
+this playbookcreates new image and 
+pull the generated image to dockerhub.
+then removes the existed image, 
+
+now the following playbook Limits only to target env.
+check available images and containers.
+delete if they has same name as our image/container.
+ansible-playbook -i hosts project.yml --limit ip-addr-of-docker-server
+
+
+we can do all this by executing in jenkins job,in next file
